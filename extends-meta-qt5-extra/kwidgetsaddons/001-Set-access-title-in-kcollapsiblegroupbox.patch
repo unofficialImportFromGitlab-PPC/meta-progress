@@ -1,0 +1,14 @@
+diff --git a/src/kcollapsiblegroupbox.cpp b/src/kcollapsiblegroupbox.cpp
+index f6e3d66..aa36b45 100644
+--- a/src/kcollapsiblegroupbox.cpp
++++ b/src/kcollapsiblegroupbox.cpp
+@@ -97,7 +97,9 @@ void KCollapsibleGroupBox::setTitle(const QString& title)
+ 
+     d->shortcutId = grabShortcut(QKeySequence::mnemonic(title));
+ 
++#ifndef QT_NO_ACCESSIBILITY
+     setAccessibleName(title);
++#endif
+ 
+     emit titleChanged();
+ }
