@@ -10,15 +10,29 @@ Dependencies
 This layer depends on:
 
   URI: git://git.openembedded.org/bitbake
-  branch: master
+  branch: morty
 
   URI: git://git.openembedded.org/openembedded-core
   layers: meta
-  branch: master
+  branch: morty
 
-  URI: git://git.yoctoproject.org/xxxx
-  layers: xxxx
+  URI: git://git.openembedded.org/meta-openembedded
+  layers: meta-openembedded
+  branch: morty
+  
+  URI: https://github.com/meta-qt5/meta-qt5.git
+  layers: meta-qt5
+  branch: morty
+  
+  URI: https://github.com/schnitzeltony/meta-qt5-extra.git 
+  layers: mera-qt5-extra
+  branch: morty
+  
+  URI:  git://github.com/OSSystems/meta-browser.git
+  layers: mera-browser
   branch: master
+  
+
 
 
 Patches
@@ -135,4 +149,3 @@ bitbake core-image-progress-minimal
 The build could take some hours, so be patient. When finished you can launch qemu as follows
 
 runqemu qemuppc
-
