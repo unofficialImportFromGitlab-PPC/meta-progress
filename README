@@ -10,15 +10,29 @@ Dependencies
 This layer depends on:
 
   URI: git://git.openembedded.org/bitbake
-  branch: master
+  branch: morty
 
   URI: git://git.openembedded.org/openembedded-core
   layers: meta
-  branch: master
+  branch: morty
 
-  URI: git://git.yoctoproject.org/xxxx
-  layers: xxxx
+  URI: git://git.openembedded.org/meta-openembedded
+  layers: meta-openembedded
+  branch: morty
+  
+  URI: https://github.com/meta-qt5/meta-qt5.git
+  layers: meta-qt5
+  branch: morty
+  
+  URI: https://github.com/schnitzeltony/meta-qt5-extra.git 
+  layers: mera-qt5-extra
+  branch: morty
+  
+  URI:  git://github.com/OSSystems/meta-browser.git
+  layers: mera-browser
   branch: master
+  
+
 
 
 Patches
@@ -62,3 +76,98 @@ II. Misc
 ========
 
 --- replace with specific information about the progress layer ---
+
+
+
+This document explains ow to create a Progress Linux Image. In addition to the Yocto base distributtion, to build an image the following additional layers are required:
+
+meta-openembedded
+meta-qt5
+mera-qt5-extra
+meta-progress
+meta-browser
+
+Currently the recommended way to build an image is to set meta-progress layer to its morty branch. This means all required layers must be using morty branch too.
+
+git clone git://git.yoctoproject.org/poky
+cd poky
+git checkout morty
+
+git clone git://git.openembedded.org/meta-openembedded
+cd meta-openembedded
+git checkout morty
+cd ..
+
+git clone https://github.com/meta-qt5/meta-qt5.git
+cd meta-qt5
+git checkout morty
+cd ..
+
+git clone https://github.com/schnitzeltony/meta-qt5-extra.git 
+cd meta-qt5-extra
+git checkout morty
+cd ..
+
+git clone https://gitlab.com/oshw-powerpc-notebook/meta-progress.git
+cd meta-progress
+git checkout morty
+cd ..
+
+git clone git://github.com/OSSystems/meta-browser.git
+# There is not morty branch
+# cd meta-browser
+# git checkout morty
+
+
+Now we will create the buidl environment:
+
+cd ..
+source poky/oe-init-build-env
+
+You will be entered in a directory called build. There are two important files in the conf folder; bblayers.conf and local.conf
+
+Your bblayers.conf file should be like this:
+
+# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+POKY_BBLAYERS_CONF_VERSION = "2"
+
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS ?= " \
+  YOUR_ABSOLUTE_PATHT_TO_POKY/meta \
+  YOUR_ABSOLUTE_PATHT_TO_POKY/meta-poky \
+  YOUR_ABSOLUTE_PATHT_TO_POKY/meta-yocto-bsp \
+  YOUR_ABSOLUTE_PATHT_TO_POKY/meta-openembedded/meta-oe \
+  YOUR_ABSOLUTE_PATHT_TO_POKY/meta-openembedded/meta-multimedia \
+  YOUR_ABSOLUTE_PATHT_TO_POKYmeta-openembedded/meta-gnome \
+  YOUR_ABSOLUTE_PATHT_TO_POKY/meta-openembedded/meta-networking  \
+  YOUR_ABSOLUTE_PATHT_TO_POKY/meta-openembedded/meta-python  \
+  YOUR_ABSOLUTE_PATHT_TO_POKYpoky/meta-qt5 \
+  YOUR_ABSOLUTE_PATHT_TO_POKY/meta-qt5-extra \
+  YOUR_ABSOLUTE_PATHT_TO_POKY/meta-progress \
+  YOUR_ABSOLUTE_PATHT_TO_POKY/meta-browser \
+"
+
+In the local.conf you should change the line containing
+
+MACHINE ??= "quemux86"
+
+to 
+
+MACHINE ??= "qemuppc"
+
+The creation of a yocto image requires a lot of disk space. In our case it probably will consume more than 30GB so it is suggested to add this line at the end of your local.conf. 
+
+INHERIT +=  " rm_work"
+
+On the contrary, if you ommit this directive future builds could take less time to finish.
+
+It's time to build our image. Currently you can make use of two recipes. First one is core-image-progress-minimal whichs is a basic graphical environments. The second is core-image-progess and includes additional applications such as a music player and a web browser. As a first expereicen we recommend to create a minimal image as every single package will be compiled from scractch and that means a lot of time.
+
+bitbake core-image-progress-minimal
+
+The build could take some hours, so be patient. When finished you can launch qemu as follows
+
+runqemu qemuppc
