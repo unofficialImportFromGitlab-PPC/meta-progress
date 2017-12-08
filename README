@@ -48,38 +48,14 @@ Table of Contents
 =================
 
   I. Adding the progress layer to your build
- II. Misc
+ II. Cook an image
 
 
 I. Adding the progress layer to your build
 =================================================
 
---- replace with specific instructions for the progress layer ---
 
-In order to use this layer, you need to make the build system aware of
-it.
-
-Assuming the progress layer exists at the top-level of your
-yocto build tree, you can add it to the build system by adding the
-location of the progress layer to bblayers.conf, along with any
-other layers needed. e.g.:
-
-  BBLAYERS ?= " \
-    /path/to/yocto/meta \
-    /path/to/yocto/meta-poky \
-    /path/to/yocto/meta-yocto-bsp \
-    /path/to/yocto/meta-progress \
-    "
-
-
-II. Misc
-========
-
---- replace with specific information about the progress layer ---
-
-
-
-This document explains ow to create a Progress Linux Image. In addition to the Yocto base distributtion, to build an image the following additional layers are required:
+This section explains how to add this layer to your Yocto environment. In addition to the Yocto base distributtion, to build an image the following additional layers are required:
 
 meta-openembedded
 meta-qt5
@@ -144,11 +120,14 @@ BBLAYERS ?= " \
   YOUR_ABSOLUTE_PATHT_TO_POKYmeta-openembedded/meta-gnome \
   YOUR_ABSOLUTE_PATHT_TO_POKY/meta-openembedded/meta-networking  \
   YOUR_ABSOLUTE_PATHT_TO_POKY/meta-openembedded/meta-python  \
-  YOUR_ABSOLUTE_PATHT_TO_POKYpoky/meta-qt5 \
+  YOUR_ABSOLUTE_PATHT_TO_POKY/meta-qt5 \
   YOUR_ABSOLUTE_PATHT_TO_POKY/meta-qt5-extra \
   YOUR_ABSOLUTE_PATHT_TO_POKY/meta-progress \
   YOUR_ABSOLUTE_PATHT_TO_POKY/meta-browser \
 "
+
+II Cook an image
+=============
 
 In the local.conf you should change the line containing
 
