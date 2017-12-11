@@ -46,7 +46,6 @@ config_session_launch() {
 config_udisks2(){
     cat << "EOF" >> ${IMAGE_ROOTFS}${sysconfdir}/polkit-1/rules.d/50-org.freedesktop.udisks2.rules
 // Allow udisks2 to mount devices without authentication
-// for users in the "wheel" group.
 polkit.addRule(function(action, subject) {
     if (action.id == "org.freedesktop.udisks2.filesystem-mount-system" ||
          action.id == "org.freedesktop.udisks2.filesystem-mount")  {
