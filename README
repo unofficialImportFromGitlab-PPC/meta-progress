@@ -54,7 +54,6 @@ Table of Contents
 I. Adding the progress layer to your build
 =================================================
 
-
 This section explains how to add this layer to your Yocto environment. In addition to the Yocto base distributtion, to build an image the following additional layers are required:
 
 meta-openembedded
