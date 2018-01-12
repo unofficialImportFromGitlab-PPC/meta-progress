@@ -16,7 +16,10 @@ RDEPENDS_packagegroup-progress-core-apps = "\
     qtbase-plugins \
     mingetty \
     networkmanager \
-    sddm"
+    sddm \
+    mozjs \
+    mesa-demos \
+    "
 #     psplash 
     
 RDEPENDS_packagegroup-progress-basic-tools = "\

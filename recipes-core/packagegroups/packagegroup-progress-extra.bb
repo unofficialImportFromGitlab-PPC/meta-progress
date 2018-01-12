@@ -8,8 +8,9 @@ PACKAGES = "\
 
 RDEPENDS_packagegroup-progress-extra-internet-apps = "\
     firefox \
-    mozjs \
-    epiphany "
+    epiphany \
+    kvirc \
+    "
     
     
 RDEPENDS_packagegroup-progress-extra-network-tools = "\

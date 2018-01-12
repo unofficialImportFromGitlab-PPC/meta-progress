@@ -8,4 +8,6 @@ inherit core-image-progress
 IMAGE_INSTALL += " \
     packagegroup-progress-internet-apps \
     packagegroup-progress-multimedia-apps \
+     packagegroup-progress-productivity-apps \
+    packagegroup-progress-graphics-apps \
     "  
