@@ -55,5 +55,11 @@ polkit.addRule(function(action, subject) {
 EOF
 }
 
+fix_directory_permissions(){    
+  chmod 755 ${IMAGE_ROOTFS}/var/lib/sddm
+  chmod 755 ${IMAGE_ROOTFS}/usr/share/polkit-1/rules.d/
+  chmod 755 ${IMAGE_ROOTFS}${sysconfdir}/polkit-1/rules.d/
+  chmod 755 ${IMAGE_ROOTFS}${sysconfdir}/polkit-1/rules.d/50-org.freedesktop.udisks2.rules
+}
 
-ROOTFS_POSTPROCESS_COMMAND += "config_session_launch; config_udisks2;"
+ROOTFS_POSTPROCESS_COMMAND += "config_session_launch; config_udisks2; fix_directory_permissions;"
