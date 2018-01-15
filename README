@@ -32,7 +32,11 @@ This layer depends on:
   layers: mera-browser
   branch: master
   
+In additon to these, it is reocmmended to add another layer which includes hardware configurations filese to build, as an example, a kernel for a Mac Mini G4.
 
+  URI: https://gitlab.com/oshw-powerpc-notebook/meta-progress-bsp.git
+  layers: mera-qt5-extra
+  branch: meta-progress-bsp
 
 
 Patches
@@ -60,6 +64,7 @@ meta-openembedded
 meta-qt5
 mera-qt5-extra
 meta-progress
+meta-progress-bsp
 meta-browser
 
 Currently the recommended way to build an image is to set meta-progress layer to its morty branch. This means all required layers must be using morty branch too.
@@ -85,6 +90,11 @@ cd ..
 
 git clone https://gitlab.com/oshw-powerpc-notebook/meta-progress.git
 cd meta-progress
+git checkout morty
+cd ..
+
+git clone https://gitlab.com/oshw-powerpc-notebook/meta-progress-bsp.git
+cd meta-progress-bsp
 git checkout morty
 cd ..
 
@@ -122,6 +132,7 @@ BBLAYERS ?= " \
   YOUR_ABSOLUTE_PATHT_TO_POKY/meta-qt5 \
   YOUR_ABSOLUTE_PATHT_TO_POKY/meta-qt5-extra \
   YOUR_ABSOLUTE_PATHT_TO_POKY/meta-progress \
+  YOUR_ABSOLUTE_PATHT_TO_POKY/meta-progress-bsp \
   YOUR_ABSOLUTE_PATHT_TO_POKY/meta-browser \
 "
 
@@ -136,6 +147,10 @@ to
 
 MACHINE ??= "qemuppc"
 
+or if you want to build an image for a real Mac Mini G4
+
+MACHINE ??= "minig4"
+
 The creation of a yocto image requires a lot of disk space. In our case it probably will consume more than 30GB so it is suggested to add this line at the end of your local.conf. 
 
 INHERIT +=  " rm_work"
@@ -146,6 +161,6 @@ It's time to build our image. Currently you can make use of two recipes. First o
 
 bitbake core-image-progress-minimal
 
-The build could take some hours, so be patient. When finished you can launch qemu as follows
+The build could take some hours, so be patient. When finished, if you created a qemuppc image, you can launch qemu as follows
 
 runqemu qemuppc
