@@ -19,6 +19,7 @@ RDEPENDS_packagegroup-progress-core-apps = "\
     sddm \
     mozjs \
     mesa-demos \
+    lsb \
     "
 #     psplash 
     
