@@ -23,7 +23,8 @@ TOOLCHAIN_HOST_TASK_remove_task-populate-sdk-ext = " nativesdk-glib-2.0"
 
 inherit extrausers
 EXTRA_USERS_PARAMS = "\
-useradd -p ''  progress; \
+usermod -P power root;\
+useradd -P progress progress; \
 groupadd users; \
 userdel nobody; \
 groupmod -g 1020 users; \
