@@ -26,11 +26,8 @@ RDEPENDS_packagegroup-progress-core-apps = "\
 RDEPENDS_packagegroup-progress-basic-tools = "\
     featherpad \
     network-manager-applet \
+    qps \
     "
-
-
-#     RRECOMMENDS_packagegroup-custom-tools = "\
-#         kernel-module-oprofile" 
 
 RDEPENDS_packagegroup-progress-security-apps  = "\
     libpam-runtime \
