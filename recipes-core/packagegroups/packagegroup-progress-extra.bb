@@ -3,8 +3,13 @@ DESCRIPTION = "Package groups for being distributed from an additional removable
 inherit packagegroup
 
 PACKAGES = "\
+    packagegroup-progress-extra-utilities \
     packagegroup-progress-extra-internet-apps \
     packagegroup-progress-extra-network-apps"
+
+RDEPENDS_packagegroup-progress-extra-utilities = "\
+    simplescreenrecorder \
+    "
 
 RDEPENDS_packagegroup-progress-extra-internet-apps = "\
     firefox \
