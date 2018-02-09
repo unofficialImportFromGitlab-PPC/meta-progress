@@ -1,6 +1,6 @@
 SUMMARY = "Audacious is an open source audio player. A descendant of XMMS, Audacious plays your music how you want it, without stealing away your computer’s resources from other tasks."
 HOMEPAGE = "https://audacious-media-player.org/"
-LICENSE = "Audacious"
+LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3e1b6de75db8b4a3c68f791b50500cf5"
 
 inherit autotools-brokensep  pkgconfig gettext
