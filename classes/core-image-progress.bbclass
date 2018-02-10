@@ -35,6 +35,7 @@ usermod -a -G audio progress;\
 usermod -a -G pulse progress;\
 usermod -a -G netdev progress;\
 usermod -a -G plugdev progress;\
+usermod -a -G video progress;\
 "
      
 config_session_launch() {
