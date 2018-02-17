@@ -1,6 +1,6 @@
 SUMMARY = "KVIrc is a free portable IRC client based on the excellent Qt GUI toolkit."
 HOMEPAGE = "http://www.kvirc.net/"
-LICENSE = "KVIRC"
+LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://doc/COPYING;md5=310f085f1f830cca24a65c1e5512b9f4"
 
 inherit cmake_qt5 
