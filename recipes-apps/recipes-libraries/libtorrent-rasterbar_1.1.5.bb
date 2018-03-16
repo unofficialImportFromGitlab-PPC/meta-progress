@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c2eb6b769958a05942513deaec0aa005"
 
 inherit autotools
 
-DEPENDS += " boost"
+DEPENDS += " boost openssl"
 
 SRC_URI = " \
     https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_5/${PN}-${PV}.tar.gz \
@@ -16,5 +16,7 @@ SRC_URI[sha256sum] = "103134068389155a0f2bccaca72a57765460eb8188495089dcad280dcf
 
 #S = "${WORKDIR}/git"
 
-EXTRA_OECONF += "--with-boost-libdir=${STAGING_LIBDIR}"
+EXTRA_OECONF += "--with-boost-libdir=${STAGING_LIBDIR} \
+            --with-openssl=${STAGING_DIR_HOST}${prefix} \
+            "
  
