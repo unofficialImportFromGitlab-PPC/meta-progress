@@ -13,8 +13,9 @@ IMAGE_INSTALL += " \
     packagegroup-progress-security-apps \
     packagegroup-progress-basic-tools \
     "
+BAD_RECOMMENDATIONS = " polkit-group-rule-datetime "    
 
-IMAGE_INSTALL_remove += " polkit-group-rule-datetime  matchbox-wm matchbox-terminal "
+IMAGE_INSTALL_remove += " matchbox-wm matchbox-terminal "
 
 IMAGE_LINGUAS_append = "  es-es de-de fr-fr it-it"
 
