@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e4232be386c99ea029d1af8123ace1f2"
 inherit autotools-brokensep  pkgconfig gettext
 
 DEPENDS += " \
+audacious \
 mpg123 \
 wavpack \
 neon \
@@ -29,13 +30,13 @@ EXTRA_OECONF += "\
 "
 
 FILES_${PN} += " \
-  /usr/lib/audacious/Input/ \
-  /usr/lib/audacious/Container/ \
-  /usr/lib/audacious/Effect/ \
-  /usr/lib/audacious/Transport/ \
-  /usr/lib/audacious/Output/ \
-  /usr/lib/audacious/Visualization/ \
-  /usr/lib/audacious/General/ \
+  ${libdir}/audacious/Input/ \
+  ${libdir}/audacious/Container/ \
+  ${libdir}/audacious/Effect/ \
+  ${libdir}/audacious/Transport/ \
+  ${libdir}/audacious/Output/ \
+  ${libdir}/audacious/Visualization/ \
+  ${libdir}/audacious/General/ \
   /usr/share/audacious \
   /usr/share/audacious/Skins \
   /usr/share/audacious/Skins/Classic1.3 \
