@@ -5,9 +5,9 @@ HOMEPAGE = "http://www.qbittorrent.org"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2870806e3fb82aeb8ebbcdfc75f509ac"
 
-inherit cmake_qt5 
+inherit cmake_qt5 qt5-translation
 
-DEPENDS += " qtbase libtorrent-rasterbar zlib"
+DEPENDS += " qtbase libtorrent-rasterbar zlib qtsvg qttools"
 
 SRC_URI = " \
     https://github.com/qbittorrent/qBittorrent/archive/release-${PV}.tar.gz \
