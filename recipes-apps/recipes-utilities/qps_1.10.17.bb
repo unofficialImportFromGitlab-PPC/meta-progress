@@ -3,12 +3,14 @@ HOMEPAGE = "https://github.com/QtDesktop/qps"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4641e94ec96f98fabc56ff9cc48be14b"
 
-inherit cmake_qt5 
+inherit cmake_qt5 qt5-translation
 
 DEPENDS += " \
-qtbase \
-qtx11extras \
-"
+        qtbase \
+        qtx11extras \
+        qttools \
+        libxrender \
+        "
 
 
 SRC_URI = "https://github.com/QtDesktop/qps/archive/${PV}.tar.gz"
