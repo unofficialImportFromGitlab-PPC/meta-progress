@@ -2,6 +2,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 RDEPENDS_${PN} += "qtquickcontrols"
 
+EXTRA_OECMAKE += "-DQT_IMPORTS_DIR=${OE_QMAKE_PATH_QML}"
+
 SRC_URI += "file://sddm.conf \
              file://faces/progress.face.icon \
              file://themes/progress/Main.qml \
