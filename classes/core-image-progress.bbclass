@@ -40,7 +40,7 @@ usermod -a -G video progress;\
 "
      
 config_session_launch() {
-  rm ${IMAGE_ROOTFS}/etc/X11/Xsession.d/89* #Removes the xdg autostart scripts which started a root X session at tty2
+  rm ${IMAGE_ROOTFS}/etc/X11/Xsession.d/90* #Removes the xdg autostart scripts which started a root X session at tty2
   echo "exec  sddm"  >${IMAGE_ROOTFS}/etc/X11/Xsession.d/90xXWindowManager.sh 
   chmod u+x ${IMAGE_ROOTFS}/etc/X11/Xsession.d/90xXWindowManager.sh 
 }
