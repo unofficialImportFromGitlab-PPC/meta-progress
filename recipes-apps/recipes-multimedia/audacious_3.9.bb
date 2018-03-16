@@ -7,6 +7,7 @@ inherit autotools-brokensep  pkgconfig gettext
 
 DEPENDS += " \
 glib-2.0 \
+glib-2.0-native \
 qtbase \
 qtx11extras \
 phonon \
