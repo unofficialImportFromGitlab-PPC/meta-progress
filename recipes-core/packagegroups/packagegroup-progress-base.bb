@@ -20,8 +20,8 @@ RDEPENDS_packagegroup-progress-core-apps = "\
     mozjs \
     mesa-demos \
     lsb \
+    xserver-xorg-extension-glx  \
     "
-#     psplash 
     
 RDEPENDS_packagegroup-progress-basic-tools = "\
     featherpad \
