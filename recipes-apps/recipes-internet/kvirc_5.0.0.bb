@@ -37,6 +37,21 @@ EXTRA_OECMAKE += "-DWANT_ENV_FLAGS=ON \
                 -DTEST_DID_RUN__TRYRUN_OUTPUT=0 \
                 -DTEST_DID_RUN_DYNLABELS=0 \
                 "
+                
+do_install_append(){
+    install -d ${D}${libdir}
+    
+    install -d ${D}/${libdir}/kvirc/4.9/modules/
+    install -m 0644 ${WORKDIR}/image/usr/lib/kvirc/4.9/modules/* ${D}/${libdir}/kvirc/4.9/modules/
+    
+    install -m 0644 ${WORKDIR}/image/usr/lib/libkvilib.so.4.9.1 ${D}/${libdir}/
+    install -m 0644 ${WORKDIR}/image/usr/lib/libkvilib.so ${D}/${libdir}/
+    install -m 0644 ${WORKDIR}/image/usr/lib/libkvilib.so.4 ${D}/${libdir}/
+    rm -rf ${WORKDIR}/image/usr/lib
+}
+
+FILES_SOLIBSDEV = ""
+FILES_${PN} += "${libdir}/libkvilib.so"
 
 FILES_${PN} += " \
   /usr/share/icons/hicolor/64x64/mimetypes/text-x-kvs.png \
