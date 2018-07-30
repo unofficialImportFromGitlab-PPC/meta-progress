@@ -21,6 +21,7 @@ RDEPENDS_packagegroup-progress-core-apps = "\
     mesa-demos \
     lsb \
     xserver-xorg-extension-glx  \
+    setxkbmap \
     "
     
 RDEPENDS_packagegroup-progress-basic-tools = "\
