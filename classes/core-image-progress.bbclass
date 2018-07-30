@@ -66,4 +66,17 @@ fix_directory_permissions(){
   chmod 755 ${IMAGE_ROOTFS}${sysconfdir}/polkit-1/rules.d/50-org.freedesktop.udisks2.rules
 }
 
-ROOTFS_POSTPROCESS_COMMAND += "config_session_launch; config_udisks2; fix_directory_permissions;"
+
+add_repository(){
+  mkdir ${IMAGE_ROOTFS}${sysconfdir}/yum.repos.d 
+  cat << "EOF" >> ${IMAGE_ROOTFS}${sysconfdir}/yum.repos.d/progress-repo.repo
+[progress-repo]                                                                                                                                             
+name=Power Progress Community Linux repo                                                                                                                        
+baseurl=http://repo.powerprogress.org/yocto/rpm/                  
+enabled=1                                               
+metadata_expire=0                            
+gpgcheck=0      
+EOF
+}
+
+ROOTFS_POSTPROCESS_COMMAND += "config_session_launch; config_udisks2; fix_directory_permissions; add_repository;"
