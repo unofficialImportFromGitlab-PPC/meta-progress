@@ -1,1 +1,3 @@
-PACKAGECONFIG += " --disable-lua" 
+DEPENDS += " libxscrnsaver   xext  xinerama  xrandr  "
+
+PACKAGECONFIG += " vdpau" 
