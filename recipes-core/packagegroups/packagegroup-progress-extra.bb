@@ -12,7 +12,7 @@ RDEPENDS_packagegroup-progress-extra-utilities = "\
     "
 
 RDEPENDS_packagegroup-progress-extra-internet-apps = "\
-    firefox \
+    otter-browser \
     epiphany \
     kvirc \
     "

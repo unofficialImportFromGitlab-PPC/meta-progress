@@ -1,0 +1,15 @@
+diff --git a/intl/icu/source/configure b/intl/icu/source/configure.b
+old mode 100755
+new mode 100644
+index c0d512a..a2d3b54
+--- a/intl/icu/source/configure
++++ b/intl/icu/source/configure.b
+@@ -7059,7 +7059,7 @@ fi
+ 
+ if test x$ac_cv_func_strtod_l = xyes
+ then
+-     CONFIG_CPPFLAGS="${CONFIG_CPPFLAGS} -DU_HAVE_STRTOD_L=1"
++     CONFIG_CPPFLAGS="${CONFIG_CPPFLAGS} -DU_HAVE_STRTOD_L=0"
+      U_HAVE_STRTOD_L=1
+ else
+      CONFIG_CPPFLAGS="${CONFIG_CPPFLAGS} -DU_HAVE_STRTOD_L=0"

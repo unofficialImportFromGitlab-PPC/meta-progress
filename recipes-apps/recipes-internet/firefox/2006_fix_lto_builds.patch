@@ -1,0 +1,64 @@
+From: Jory A. Pratt <anarchy@gentoo.org>
+
+Convert --parma to --lto-partiton
+
+diff --git a/ipc/app/moz.build b/ipc/app/moz.build
+--- a/ipc/app/moz.build
++++ b/ipc/app/moz.build
+@@ -67,17 +67,17 @@ if CONFIG['MOZ_SANDBOX'] and CONFIG['OS_
+     USE_LIBS += [
+         'mozsandbox',
+     ]
+ 
+     # gcc lto likes to put the top level asm in syscall.cc in a different partition
+     # from the function using it which breaks the build.  Work around that by
+     # forcing there to be only one partition.
+     if '-flto' in CONFIG['OS_CXXFLAGS'] and not CONFIG['CLANG_CXX']:
+-        LDFLAGS += ['--param lto-partitions=1']
++        LDFLAGS += ['--lto-partition=one']
+ 
+ if CONFIG['MOZ_SANDBOX'] and CONFIG['OS_TARGET'] == 'Darwin':
+     # For sandbox includes and the include dependencies those have
+     LOCAL_INCLUDES += [
+         '/security/sandbox/chromium',
+         '/security/sandbox/chromium-shim',
+     ]
+     USE_LIBS += [
+diff --git a/ipc/app/pie/moz.build b/ipc/app/pie/moz.build
+--- a/ipc/app/pie/moz.build
++++ b/ipc/app/pie/moz.build
+@@ -20,11 +20,11 @@ if CONFIG['MOZ_SANDBOX']:
+     USE_LIBS += [
+         'mozsandbox',
+     ]
+ 
+     # gcc lto likes to put the top level asm in syscall.cc in a different partition
+     # from the function using it which breaks the build.  Work around that by
+     # forcing there to be only one partition.
+     if '-flto' in CONFIG['OS_CXXFLAGS'] and not CONFIG['CLANG_CXX']:
+-	LDFLAGS += ['--param lto-partitions=1']
++	LDFLAGS += ['--lto-partition=one']
+ 
+ LDFLAGS += ['-pie']
+diff --git a/security/sandbox/linux/moz.build b/security/sandbox/linux/moz.build
+--- a/security/sandbox/linux/moz.build
++++ b/security/sandbox/linux/moz.build
+@@ -84,17 +84,17 @@ if CONFIG['GNU_CXX']:
+     SOURCES['../chromium/sandbox/linux/services/syscall_wrappers.cc'].flags += [
+         '-Wno-empty-body',
+     ]
+ 
+ # gcc lto likes to put the top level asm in syscall.cc in a different partition
+ # from the function using it which breaks the build.  Work around that by
+ # forcing there to be only one partition.
+ if '-flto' in CONFIG['OS_CXXFLAGS'] and not CONFIG['CLANG_CXX']:
+-    LDFLAGS += ['--param lto-partitions=1']
++    LDFLAGS += ['--lto-partition=one']
+ 
+ DEFINES['NS_NO_XPCOM'] = True
+ DISABLE_STL_WRAPPING = True
+ 
+ LOCAL_INCLUDES += ['/security/sandbox/linux']
+ LOCAL_INCLUDES += ['/security/sandbox/chromium-shim']
+ LOCAL_INCLUDES += ['/security/sandbox/chromium']
+ LOCAL_INCLUDES += ['/nsprpub']

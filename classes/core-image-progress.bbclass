@@ -9,10 +9,9 @@ IMAGE_FEATURES +=  "splash package-management x11-base ssh-server-dropbear hwcod
 IMAGE_INSTALL += " \
     kernel-modules \
     packagegroup-core-full-cmdline \
-    packagegroup-progress-core-apps \
-    packagegroup-progress-security-apps \
-    packagegroup-progress-basic-tools \
     "
+
+# This recipe is added by meta-qt5-extras and causes an error (a conflict with polkit). The same rule is added using the function config_settime (see below)
 BAD_RECOMMENDATIONS = " polkit-group-rule-datetime "    
 
 IMAGE_INSTALL_remove += " matchbox-wm matchbox-terminal "
@@ -59,11 +58,24 @@ polkit.addRule(function(action, subject) {
 EOF
 }
 
+# polkit-group-rule-datetime has been removed (see the previous comment). It was added by meta-qt5-extras and causes an error (a conflict with polkit). The same rule is added using this function 
+config_settime(){
+    cat << "EOF" >> ${IMAGE_ROOTFS}${sysconfdir}/polkit-1/rules.d/50-org.freedesktop.timedate1.rules
+// Give group 'datetime' rights to change settings based upon http://lists.freedesktop.org/archives/systemd-devel/2013-March/009576.html 
+polkit.addRule(function(action, subject) {
+  if (action.id.indexOf("org.freedesktop.timedate1.") == 0 && subject.isInGroup("datetime")) {
+    return polkit.Result.YES;
+  }
+});    
+EOF
+}
+
+
 fix_directory_permissions(){    
   chmod 755 ${IMAGE_ROOTFS}/var/lib/sddm
   chmod 755 ${IMAGE_ROOTFS}/usr/share/polkit-1/rules.d/
   chmod 755 ${IMAGE_ROOTFS}${sysconfdir}/polkit-1/rules.d/
-  chmod 755 ${IMAGE_ROOTFS}${sysconfdir}/polkit-1/rules.d/50-org.freedesktop.udisks2.rules
+  chmod 755 ${IMAGE_ROOTFS}${sysconfdir}/polkit-1/rules.d/*
 }
 
 
@@ -79,4 +91,4 @@ gpgcheck=0
 EOF
 }
 
-ROOTFS_POSTPROCESS_COMMAND += "config_session_launch; config_udisks2; fix_directory_permissions; add_repository;"
+ROOTFS_POSTPROCESS_COMMAND += "config_session_launch; config_udisks2; config_settime; fix_directory_permissions; add_repository; "

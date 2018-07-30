@@ -1,0 +1,26 @@
+From: Jory A. Pratt <anarchy@gentoo.org>
+
+Fix random crashes caused by newer GLSL versions
+
+diff --git a/dom/canvas/WebGLShaderValidator.cpp b/dom/canvas/WebGLShaderValidator.cpp
+--- a/dom/canvas/WebGLShaderValidator.cpp
++++ b/dom/canvas/WebGLShaderValidator.cpp
+@@ -109,17 +109,17 @@ ShaderOutput(gl::GLContext* gl)
+         case 330: return SH_GLSL_330_CORE_OUTPUT;
+         case 400: return SH_GLSL_400_CORE_OUTPUT;
+         case 410: return SH_GLSL_410_CORE_OUTPUT;
+         case 420: return SH_GLSL_420_CORE_OUTPUT;
+         case 430: return SH_GLSL_430_CORE_OUTPUT;
+         case 440: return SH_GLSL_440_CORE_OUTPUT;
+         case 450: return SH_GLSL_450_CORE_OUTPUT;
+         default:
+-            MOZ_CRASH("GFX: Unexpected GLSL version.");
++            MOZ_ASSERT("GFX: Unexpected GLSL version.");
+         }
+     }
+ 
+     return SH_GLSL_COMPATIBILITY_OUTPUT;
+ }
+ 
+ webgl::ShaderValidator*
+ WebGLContext::CreateShaderValidator(GLenum shaderType) const

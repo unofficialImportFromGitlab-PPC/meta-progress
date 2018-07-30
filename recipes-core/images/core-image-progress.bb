@@ -3,12 +3,6 @@ DESCRIPTION = "Progress Linux image. Linux image including LXQT plus internet, m
 LICENSE = "MIT"
 
 inherit core-image-progress
+include base-packages.inc
+require selected-packages.inc
 
-
-IMAGE_INSTALL += " \
-    packagegroup-progress-internet-apps \
-    packagegroup-progress-multimedia-apps \
-    packagegroup-progress-productivity-apps \
-    packagegroup-progress-graphics-apps \
-    packagegroup-progress-selected-tools \
-    "  

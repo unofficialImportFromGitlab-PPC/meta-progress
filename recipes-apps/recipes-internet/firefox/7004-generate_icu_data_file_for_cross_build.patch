@@ -1,0 +1,15 @@
+diff --git a/intl/icu_sources_data.py b/intl/icu_sources_data.py.b
+index 98c0ccb..88430b5 100644
+--- a/intl/icu_sources_data.py
++++ b/intl/icu_sources_data.py.b
+@@ -125,7 +125,9 @@ def update_data_file(topsrcdir):
+              '--disable-layout',
+              '--disable-tests',
+              '--disable-samples',
+-             '--disable-strict'],
++             '--disable-strict',
++             '--host='+os.environ.get('TARGET_SYS'),
++             '--with-cross-build='+os.environ.get('ICU_NATIVEDIR')],
+             cwd=objdir,
+             env=env):
+         return False
