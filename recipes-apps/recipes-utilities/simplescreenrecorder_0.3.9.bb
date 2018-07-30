@@ -10,6 +10,7 @@ qtbase \
 qtx11extras \
 alsa-lib \
 ffmpeg \
+pulseaudio \
 "
 
 
