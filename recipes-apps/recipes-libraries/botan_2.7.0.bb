@@ -21,14 +21,17 @@ do_compile() {
 
 do_install(){
     oe_runmake 'DESTDIR=${D}'  install
+    mv ${D}${includedir}/botan-2/botan ${D}${includedir}/botan/
     #rm ${D}${libdir}/libbotan-2.a
 }
 
-FILES_${PN}-dev += " \
-  ${includedir}/botan-2/botan/* \
-  ${docdir}/* \
+FILES_${PN} += " \
   ${libdir}/libbotan-2* \
   ${libdir}/python2.7/site-packages/botan2.py\
-  ${libdir}/pkgconfig/botan-2.pc\
   ${bindir}/botan\
+  "
+FILES_${PN}-dev += " \
+  ${includedir}/botan/* \
+  ${docdir}/* \
+  ${libdir}/pkgconfig/botan-2.pc\
   "
