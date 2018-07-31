@@ -17,4 +17,6 @@ pref("extensions.autoDisableScopes", 0);
 pref("layout.css.dpi", 0);
 pref("layers.acceleration.force-enabled",  true);
 pref("webgl.force-enabled",                true);
+pref("browser.tabs.remote.autostart",      false); 
+pref("browser.tabs.remote.autostart.2",    false); 
 
