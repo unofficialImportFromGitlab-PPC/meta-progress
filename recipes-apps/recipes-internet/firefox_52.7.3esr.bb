@@ -2,6 +2,8 @@ DESCRIPTION ?= "Browser made by mozilla"
 DEPENDS += "alsa-lib curl startup-notification libevent libnotify libvpx \
             virtual/libgl nss nspr nspr-native pulseaudio yasm-native icu icu-native unzip-native"
 
+RDEPENDS_${PN}  += "icu"
+
 LICENSE = "MPLv1 | GPLv2+ | LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://toolkit/content/license.html;endline=39;md5=f7e14664a6dca6a06efe93d70f711c0e"
 
