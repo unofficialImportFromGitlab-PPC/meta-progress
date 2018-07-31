@@ -19,7 +19,10 @@ SRC_URI += "file://sddm.conf \
              file://themes/progress/images/background.jpg \
              file://init.d/sddm \
              file://0004-xsession_ck_launch_session.patch \
+             file://0005-set_software_renderer.patch \
 " 
+
+PR="r2"
 
 do_install_append() { 
     install -m 644 ${WORKDIR}/sddm.conf ${D}${sysconfdir} 

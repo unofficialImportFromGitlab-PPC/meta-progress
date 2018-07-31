@@ -1,0 +1,18 @@
+--- a/src/greeter/GreeterApp.cpp	2018-07-30 17:07:26.320309287 +0200
++++ b/src/greeter/GreeterApp.cpp	2018-07-30 17:31:49.742824443 +0200
+@@ -39,6 +39,7 @@
+ #include <QDebug>
+ #include <QTimer>
+ #include <QTranslator>
++#include <QQuickWindow>
+ 
+ #include <iostream>
+ 
+@@ -274,6 +275,7 @@
+         return EXIT_FAILURE;
+     }
+ 
++    QQuickWindow::setSceneGraphBackend(QSGRendererInterface::Software);
+     SDDM::GreeterApp app(argc, argv);
+ 
+     return app.exec();
