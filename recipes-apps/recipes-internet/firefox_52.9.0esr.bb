@@ -46,12 +46,12 @@ SRC_URI = "${MOZ_HTTP_URI}/${PV}/source/firefox-${PV}.source.tar.xz \
 "
 
 
-SRC_URI[md5sum] = "06eb5d65a6e0eb5b1c21c73430534c43"
-SRC_URI[sha256sum] = "5cc68c1a7486cfbbf02aec0e9da9f87b55e7bfc68c7d5139bc1e578441aaf19f"
+SRC_URI[md5sum] = "b8c2f3619c684818be9a513f8aa1dbfd"
+SRC_URI[sha256sum] = "c01d09658c53c1b3a496e353a24dad03b26b81d3b1d099abc26a06f81c199dd6"
 
-S = "${WORKDIR}/firefox-52.7.3esr"
+S = "${WORKDIR}/firefox-52.9.0esr"
 # MOZ_APP_BASE_VERSION should be incremented after a release
-MOZ_APP_BASE_VERSION = "52.7"
+MOZ_APP_BASE_VERSION = "52.9"
 
 SECTION = "x11/utils"
 DEPENDS += "gnu-config-native virtual/libintl libxt libxi zip-native gtk+ icu-native git-native autoconf213 autoconf213-native"
