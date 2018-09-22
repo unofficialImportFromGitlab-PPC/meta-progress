@@ -17,7 +17,7 @@ IMAGE_INSTALL += "\
 
 #Productivity
 IMAGE_INSTALL +=  "\
-    abiword \
+    libreoffice \
     qpdfview \
     "
 #Tools    
