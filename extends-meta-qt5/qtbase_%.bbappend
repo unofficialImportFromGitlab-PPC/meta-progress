@@ -1,6 +1,8 @@
 
 PACKAGECONFIG_FONTS = "fontconfig" 
 
+PACKAGECONFIG_append= "sql-sqlite"
+
 #https://github.com/meta-qt5/meta-qt5/commit/3cf0bbb8e1113376d5b5b26ecff362e180a180fd
 #qtbase_git: install qt.conf for the target
 #The build-in qmake settings point to the sysroots on the host machine.
