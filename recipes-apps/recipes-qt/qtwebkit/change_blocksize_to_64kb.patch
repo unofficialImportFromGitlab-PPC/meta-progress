@@ -1,0 +1,70 @@
+--- a/Source/JavaScriptCore/heap/CopiedBlock.h	2016-03-24 09:52:41.880341676 -0400
++++ b/Source/JavaScriptCore/heap/CopiedBlock.h	2016-03-24 09:52:53.040529065 -0400
+@@ -79,7 +79,7 @@ public:
+     size_t size();
+     size_t capacity();
+ 
+-    static const size_t blockSize = 32 * KB;
++    static const size_t blockSize = 64 * KB;
+ 
+     bool hasWorkList();
+     CopyWorkList& workList();
+--- a/Source/JavaScriptCore/interpreter/JSStack.cpp	2016-03-24 09:53:05.420737036 -0400
++++ b/Source/JavaScriptCore/interpreter/JSStack.cpp	2016-03-24 09:55:14.492905107 -0400
+@@ -61,7 +61,8 @@ JSStack::JSStack(VM& vm)
+     size_t capacity = Options::maxPerThreadStackUsage();
+     ASSERT(capacity && isPageAligned(capacity));
+ 
+-    m_reservation = PageReservation::reserve(WTF::roundUpToMultipleOf(commitSize(), capacity), OSAllocator::JSVMStackPages);
++    m_reservation = PageReservation::reserve(WTF::roundUpToMultipleOf(pageSize(), capacity), OSAllocator::JSVMStackPages);
++
+     setStackLimit(highAddress());
+     m_commitTop = highAddress();
+     
+@@ -95,7 +96,7 @@ bool JSStack::growSlowCase(Register* new
+     // have it is still within our budget. If not, we'll fail to grow and
+     // return false.
+     ptrdiff_t delta = reinterpret_cast<char*>(m_commitTop) - reinterpret_cast<char*>(newTopOfStackWithReservedZone);
+-    delta = WTF::roundUpToMultipleOf(commitSize(), delta);
++    delta = WTF::roundUpToMultipleOf(pageSize(), delta);
+     Register* newCommitTop = m_commitTop - (delta / sizeof(Register));
+     if (newCommitTop < reservationTop())
+         return false;
+--- a/Source/JavaScriptCore/llint/LowLevelInterpreter64.asm	2016-03-24 10:37:56.355942762 -0400
++++ b/Source/JavaScriptCore/llint/LowLevelInterpreter64.asm	2016-03-24 10:40:50.578868670 -0400
+@@ -2016,7 +2016,7 @@ macro loadWithStructureCheck(operand, sl
+ end
+ 
+ macro getProperty(slow)
+-    loadisFromInstruction(6, t1)
++    loadpFromInstruction(6, t1)
+     loadPropertyAtVariableOffset(t1, t0, t2, slow)
+     valueProfile(t2, 7, t0)
+     loadisFromInstruction(1, t0)
+@@ -2033,7 +2033,7 @@ macro getGlobalVar(tdzCheckIfNecessary)
+ end
+ 
+ macro getClosureVar()
+-    loadisFromInstruction(6, t1)
++    loadpFromInstruction(6, t1)
+     loadq JSEnvironmentRecord_variables[t0, t1, 8], t0
+     valueProfile(t0, 7, t1)
+     loadisFromInstruction(1, t1)
+@@ -2106,7 +2106,7 @@ _llint_op_get_from_scope:
+ macro putProperty(slow)
+     loadisFromInstruction(3, t1)
+     loadConstantOrVariable(t1, t2)
+-    loadisFromInstruction(6, t1)
++    loadpFromInstruction(6, t1)
+     storePropertyAtVariableOffset(t1, t0, t2, slow)
+ end
+ 
+@@ -2122,7 +2122,7 @@ end
+ macro putClosureVar()
+     loadisFromInstruction(3, t1)
+     loadConstantOrVariable(t1, t2)
+-    loadisFromInstruction(6, t1)
++    loadpFromInstruction(6, t1)
+     storeq t2, JSEnvironmentRecord_variables[t0, t1, 8]
+ end
+ 

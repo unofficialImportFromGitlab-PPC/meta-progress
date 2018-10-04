@@ -1,0 +1,34 @@
+From 23d86b98f095a25b6bc78b9d3654077a7f1f5c04 Mon Sep 17 00:00:00 2001
+From: Thiago Macieira <thiago.macieira@intel.com>
+Date: Mon, 3 Jul 2017 12:46:34 -0700
+Subject: [PATCH] Fix build when Qt uses OpenGL ES 2
+
+The QT_OPENGL_ES_2 macro is a QtGui feature, so it's not provided by
+qglobal.h, but instead qtguiglobal.h (a header new in 5.8.0).
+
+Using the QtGui/ prefix here to make sure it includes even if
+WTF/Platform.h is compiled without -I$QTDIR/include/QtGui.
+
+Change-Id: I8d96dea9955d4c749b99fffd14cde9c566436381
+Reviewed-by: Allan Sandfeld Jensen <allan.jensen@qt.io>
+---
+ Source/WTF/wtf/Platform.h | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/Source/WTF/wtf/Platform.h b/Source/WTF/wtf/Platform.h
+index f3d725217..0666ac710 100644
+--- a/Source/WTF/wtf/Platform.h
++++ b/Source/WTF/wtf/Platform.h
+@@ -1052,6 +1052,9 @@
+ #if PLATFORM(QT)
+ #ifdef __cplusplus
+ #include <qglobal.h>
++#if QT_VERSION >= QT_VERSION_CHECK(5,8,0)
++#include <QtGui/qtguiglobal.h>
++#endif
+ #endif
+ #if defined(QT_OPENGL_ES_2) && !defined(USE_OPENGL_ES_2)
+ #define USE_OPENGL_ES_2 1
+-- 
+2.15.1
+
