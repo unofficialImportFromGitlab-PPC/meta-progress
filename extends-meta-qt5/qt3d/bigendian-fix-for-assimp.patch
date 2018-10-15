@@ -1,0 +1,11 @@
+--- a/src/3rdparty/assimp/code/glTFAsset.inl
++++ b/src/3rdparty/assimp/code/glTFAsset.inl
+@@ -40,6 +40,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ 
+ #include "StringUtils.h"
+ 
++using namespace Assimp;
++
+ namespace glTF {
+ 
+ namespace {
