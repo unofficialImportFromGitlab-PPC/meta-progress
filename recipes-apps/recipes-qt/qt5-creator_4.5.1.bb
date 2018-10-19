@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit qmake5
 
-DEPENDS = "qtbase qtscript qtwebkit qtxmlpatterns qtx11extras qtdeclarative qttools qttools-native qtsvg botan"
+DEPENDS = "qtbase qtscript qtwebkit qtxmlpatterns qtx11extras qtdeclarative qttools qttools-native qtsvg botan chrpath-replacement-native"
 DEPENDS_append_libc-musl = " libexecinfo"
 
 # Patches from https://github.com/meta-qt5/qtcreator/commits/b5.4.1
@@ -35,6 +35,8 @@ S = "${WORKDIR}/qt-creator-opensource-src-${PV}"
 EXTRA_QMAKEVARS_PRE += "IDE_LIBRARY_BASENAME=${baselib}${QT_DIR_NAME}"
 EXTRA_QMAKEVARS_PRE += " USE_SYSTEM_BOTAN=1"
 
+EXTRANATIVEPATH += "chrpath-native"
+
 do_configure_append() {
     # Find native tools
     sed -i 's:${STAGING_BINDIR}.*/qdoc:${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/qdoc:g' ${B}/Makefile
@@ -47,6 +49,24 @@ do_install() {
     install -d ${D}${datadir}/applications
     install -m 0644 ${WORKDIR}/qtcreator.desktop.in ${D}${datadir}/applications/qtcreator.desktop
     sed -i 's:@QT5_QMAKE@:${OE_QMAKE_PATH_QT_BINS}:g' ${D}${datadir}/applications/qtcreator.desktop
+    chrpath --delete ${D}${libexecdir}/qtcreator/qtcreator_process_stub
+    chrpath --delete ${D}${libexecdir}/qtcreator/qbs_processlauncher
+    chrpath --delete ${D}${libdir}/${QT_DIR_NAME}/qtcreator/libqbscore.so.*
+    chrpath --delete ${D}${libdir}/${QT_DIR_NAME}/qtcreator/plugins/qmldesigner/libcomponentsplugin.so
+    chrpath --delete ${D}${libdir}/${QT_DIR_NAME}/qtcreator/plugins/qmldesigner/libqtquickplugin.so
+    chrpath --delete ${D}${libdir}/${QT_DIR_NAME}/qtcreator/plugins/qbs/plugins/libvisualstudiogenerator.so
+    chrpath --replace $ORIGIN/../lib64/qt5/qtcreator:$ORIGIN/../lib64/qt5 ${D}${bindir}/qbs
+    chrpath --replace $ORIGIN/../lib64/qt5/qtcreator:$ORIGIN/../lib64/qt5 ${D}${bindir}/qbs-setup-toolchains 
+    chrpath --replace $ORIGIN/../lib64/qt5/qtcreator:$ORIGIN/../lib64/qt5 ${D}${bindir}/qbs-config 
+    chrpath --replace $ORIGIN/../lib64/qt5/qtcreator:$ORIGIN/../lib64/qt5 ${D}${bindir}/qbs-setup-android
+    chrpath --replace $ORIGIN/../lib64/qt5/qtcreator:$ORIGIN/../lib64/qt5 ${D}${bindir}/qbs-qmltypes
+    chrpath --replace $ORIGIN/../lib64/qt5/qtcreator:$ORIGIN/../lib64/qt5 ${D}${bindir}/qbs-setup-qt
+    chrpath --replace $ORIGIN/../lib64/qt5/qtcreator:$ORIGIN/../lib64/qt5 ${D}${bindir}/qbs-create-project
+    chrpath --replace $ORIGIN/../lib64/qt5/qtcreator:$ORIGIN/../lib64/qt5 ${D}${bindir}/qbs-config-ui
+    chrpath --replace $ORIGIN/../lib64/qt5 ${D}${libdir}${QT_DIR_NAME}/qtcreator/libqbsqtprofilesetup.so.*
+    chrpath --replace $ORIGIN/../lib64/qt5 ${D}${libdir}/${QT_DIR_NAME}/qtcreator/plugins/qbs/plugins/libqbs_cpp_scanner.so
+    chrpath --replace $ORIGIN/../lib64/qt5 ${D}${libdir}/${QT_DIR_NAME}/qtcreator/plugins/qbs/plugins/libclangcompilationdbgenerator.so
+    chrpath --replace $ORIGIN/../lib64/qt5 ${D}${libdir}/${QT_DIR_NAME}/qtcreator/plugins/qbs/plugins/libqbs_qt_scanner.so
 }
 
 FILES_${PN} += " \
