@@ -84,7 +84,7 @@ add_repository(){
   cat << "EOF" >> ${IMAGE_ROOTFS}${sysconfdir}/yum.repos.d/progress-repo.repo
 [progress-repo]                                                                                                                                             
 name=Power Progress Community Linux repo                                                                                                                        
-baseurl=http://repo.powerprogress.org/yocto/rpm/                  
+baseurl=http://repo.powerprogress.org/yocto/0.6/rpm/                  
 enabled=1                                               
 metadata_expire=0                            
 gpgcheck=0      
