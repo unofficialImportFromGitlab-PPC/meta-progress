@@ -36,8 +36,8 @@ EXTRA_OECMAKE += "-DWANT_ENV_FLAGS=ON \
                 -DTEST_DID_RUN=0 \
                 -DTEST_DID_RUN__TRYRUN_OUTPUT=0 \
                 -DTEST_DID_RUN_DYNLABELS=0 \
-                 ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
-                 ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
+                 ${@oe.utils.conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
+                 ${@oe.utils.conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
                 "
                 
 FILES_${PN} += " \
