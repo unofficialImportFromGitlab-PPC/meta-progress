@@ -10,23 +10,23 @@ Dependencies
 This layer depends on:
 
   URI: git://git.openembedded.org/bitbake
-  branch: morty
+  branch: rocko
 
   URI: git://git.openembedded.org/openembedded-core
   layers: meta
-  branch: morty
+  branch: rocko
 
   URI: git://git.openembedded.org/meta-openembedded
   layers: meta-openembedded
-  branch: morty
+  branch: rocko
   
   URI: https://github.com/meta-qt5/meta-qt5.git
   layers: meta-qt5
-  branch: morty
+  branch: rocko
   
   URI: https://github.com/schnitzeltony/meta-qt5-extra.git 
   layers: mera-qt5-extra
-  branch: morty
+  branch: rocko
   
   URI:  git://github.com/OSSystems/meta-browser.git
   layers: mera-browser
@@ -67,41 +67,41 @@ meta-progress
 meta-progress-bsp
 meta-browser
 
-Currently the recommended way to build an image is to set meta-progress layer to its morty branch. This means all required layers must be using morty branch too.
+Currently the recommended way to build an image is to set meta-progress layer to its rocko branch. This means all required layers must be using rocko branch too.
 
 git clone git://git.yoctoproject.org/poky
 cd poky
-git checkout morty
+git checkout rocko
 
 git clone git://git.openembedded.org/meta-openembedded
 cd meta-openembedded
-git checkout morty
+git checkout rocko
 cd ..
 
 git clone https://github.com/meta-qt5/meta-qt5.git
 cd meta-qt5
-git checkout morty
+git checkout rocko
 cd ..
 
 git clone https://github.com/schnitzeltony/meta-qt5-extra.git 
 cd meta-qt5-extra
-git checkout morty
+git checkout rocko
 cd ..
 
 git clone https://gitlab.com/oshw-powerpc-notebook/meta-progress.git
 cd meta-progress
-git checkout morty
+git checkout rocko
 cd ..
 
 git clone https://gitlab.com/oshw-powerpc-notebook/meta-progress-bsp.git
 cd meta-progress-bsp
-git checkout morty
+git checkout rocko
 cd ..
 
 git clone git://github.com/OSSystems/meta-browser.git
-# There is not morty branch
+# There is not rocko branch
 # cd meta-browser
-# git checkout morty
+# git checkout rocko
 
 
 Now we will create the buidl environment:
