@@ -1,8 +1,6 @@
 
 inherit core-image
 
-DISTRO_FEATURES += " pam x11 keyboard usbgadget usbhost wifi opengl dircertfb"
-
 IMAGE_FEATURES +=  "splash package-management x11-base ssh-server-dropbear hwcodecs"
 
 
@@ -84,7 +82,7 @@ add_repository(){
   cat << "EOF" >> ${IMAGE_ROOTFS}${sysconfdir}/yum.repos.d/progress-repo.repo
 [progress-repo]                                                                                                                                             
 name=Power Progress Community Linux repo                                                                                                                        
-baseurl=http://repo.powerprogress.org/yocto/0.6/rpm/                  
+baseurl=http://repo.powerprogress.org/yocto/${DISTRO_VERSION}/rpm/                  
 enabled=1                                               
 metadata_expire=0                            
 gpgcheck=0      
