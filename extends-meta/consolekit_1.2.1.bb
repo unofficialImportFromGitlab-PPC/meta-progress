@@ -26,7 +26,6 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}
                    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 
 PACKAGECONFIG[pam] = "--enable-pam-module --with-pam-module-dir=${base_libdir}/security,--disable-pam-module,libpam"
-PACKAGECONFIG[policykit] = "--with-polkit,--without-polkit,polkit"
 PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--with-systemdsystemunitdir="
 
 FILES_${PN} += "${exec_prefix}/lib/ConsoleKit \
@@ -41,6 +40,11 @@ REPLACES_${PN} = "consolekit"
 RREPLACES_${PN} = "consolekit"
 RPROVIDES_${PN} = "consolekit"
 RCONFLICTS_${PN} = "consolekit"
+
+do_configure_append(){
+    cp ${S}/libck-connector/ck-connector.h ${B}/libck-connector/
+    cp ${S}/libck-connector/ck-connector.c ${B}/libck-connector/
+}
 
 do_install_append() {
 	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
