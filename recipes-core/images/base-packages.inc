@@ -3,6 +3,7 @@ IMAGE_INSTALL += "\
     liberation-fonts \
     oxygen-fonts \
     oxygen-icons \
+    ttf-bitstream-vera \
     packagegroup-lxqt-base \
     qtbase \
     qtbase-plugins \
