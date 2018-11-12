@@ -15,6 +15,9 @@ S="${WORKDIR}/${PN}-1.4"
 
 RDEPENDS_${PN} += "perl"
 
+do_install_append(){
+    install -m 755 ${B}/src/qdirstat ${D}/${bindir}
+}
 
 #FILES_${PN} += " \
 #    ${datadir}/featherpad \
