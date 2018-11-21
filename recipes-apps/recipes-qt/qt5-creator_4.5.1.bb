@@ -51,6 +51,18 @@ do_install() {
     sed -i 's:@QT5_QMAKE@:${OE_QMAKE_PATH_QT_BINS}:g' ${D}${datadir}/applications/qtcreator.desktop
     chrpath --delete ${D}${libexecdir}/qtcreator/qtcreator_process_stub
     chrpath --delete ${D}${libexecdir}/qtcreator/qbs_processlauncher
+    chrpath --delete ${D}${libexecdir}/qtcreator/buildoutputparser
+    chrpath --delete ${D}${libexecdir}/qtcreator/buildoutputparser
+    chrpath --delete ${D}${libexecdir}/qtcreator/cpaster
+    chrpath --delete ${D}${libexecdir}/qtcreator/cpaster
+    chrpath --delete ${D}${libexecdir}/qtcreator/qtpromaker
+    chrpath --delete ${D}${libexecdir}/qtcreator/qtpromaker
+    chrpath --delete ${D}${libexecdir}/qtcreator/qml2puppet
+    chrpath --delete ${D}${libexecdir}/qtcreator/qml2puppet
+    chrpath --delete ${D}${libexecdir}/qtcreator/sdktool
+    chrpath --delete ${D}${libexecdir}/qtcreator/sdktool
+    chrpath --delete ${D}${bindir}/qtcreator
+    chrpath --delete ${D}${bindir}/qtcreator 
     chrpath --delete ${D}${libdir}/${QT_DIR_NAME}/qtcreator/libqbscore.so.*
     chrpath --delete ${D}${libdir}/${QT_DIR_NAME}/qtcreator/plugins/qmldesigner/libcomponentsplugin.so
     chrpath --delete ${D}${libdir}/${QT_DIR_NAME}/qtcreator/plugins/qmldesigner/libqtquickplugin.so
@@ -63,10 +75,13 @@ do_install() {
     chrpath --replace $ORIGIN/../lib64/qt5/qtcreator:$ORIGIN/../lib64/qt5 ${D}${bindir}/qbs-setup-qt
     chrpath --replace $ORIGIN/../lib64/qt5/qtcreator:$ORIGIN/../lib64/qt5 ${D}${bindir}/qbs-create-project
     chrpath --replace $ORIGIN/../lib64/qt5/qtcreator:$ORIGIN/../lib64/qt5 ${D}${bindir}/qbs-config-ui
-    chrpath --replace $ORIGIN/../lib64/qt5 ${D}${libdir}${QT_DIR_NAME}/qtcreator/libqbsqtprofilesetup.so.*
+    chrpath --replace $ORIGIN/../lib64/qt5 ${D}${libdir}/${QT_DIR_NAME}/qtcreator/libqbsqtprofilesetup.so.*
     chrpath --replace $ORIGIN/../lib64/qt5 ${D}${libdir}/${QT_DIR_NAME}/qtcreator/plugins/qbs/plugins/libqbs_cpp_scanner.so
     chrpath --replace $ORIGIN/../lib64/qt5 ${D}${libdir}/${QT_DIR_NAME}/qtcreator/plugins/qbs/plugins/libclangcompilationdbgenerator.so
     chrpath --replace $ORIGIN/../lib64/qt5 ${D}${libdir}/${QT_DIR_NAME}/qtcreator/plugins/qbs/plugins/libqbs_qt_scanner.so
+    chrpath --delete ${D}${libdir}/${QT_DIR_NAME}/qtcreator/plugins/lib*so*
+    chrpath --delete ${D}${libdir}/${QT_DIR_NAME}/qtcreator/lib*so*
+    #chrpath --delete ${D}${libexecdir}/lib*so*
 }
 
 FILES_${PN} += " \
