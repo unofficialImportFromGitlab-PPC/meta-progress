@@ -95,7 +95,7 @@ export HOST_AR = "${BUILD_AR}"
 
 
 #EXTRA_OECONF_append = " --x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR}"
-#EXTRA_OECONF_append_libc-musl = " --disable-jemalloc"
+EXTRA_OECONF_append_libc-musl = " --disable-jemalloc"
 
 EXTRA_OEMAKE += "installdir=${libdir}/${PN}"
 
