@@ -13,6 +13,18 @@ IMAGE_INSTALL += "\
     mpv \
     audacious \
     audacious-plugins \
+"
+#Music tools
+IMAGE_INSTALL += "\
+    qjackctl \
+    fluidsynth \
+    qtractor \
+    rosegarden \
+    "
+
+#Video edition
+IMAGE_INSTALL += "\    
+    shotcut \
     "
 
 #Productivity
